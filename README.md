@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/StevenJL/rawscsi.svg)](https://travis-ci.org/StevenJL/rawscsi)
 [![Code Climate](https://codeclimate.com/github/StevenJL/rawscsi/badges/gpa.svg)](https://codeclimate.com/github/StevenJL/rawscsi)
-
+[![Test Coverage](https://codeclimate.com/github/StevenJL/rawscsi/badges/coverage.svg)](https://codeclimate.com/github/StevenJL/rawscsi)
 Ruby Amazon Web Services Cloud Search Interface (Rawscsi) is a flexible gem for searching and indexing AWS Cloud Search with the following characteristics:
 
 1) Maximal Flexibility: Rawscsi can construct very complex queries.  For example, using Cloud Search's default movies search domain, Rawscsi can find the top three James Bond movies excluding 'Casino', staring either 'Connery', 'Craig', or 'Moore', but not 'Brosnan', released after 1970. This is how `rawscsi` would construct this query:
