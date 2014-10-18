@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://search-imdb-test-klzdilptuleeedvxt7to3c5xl4.us-east-1.cloudsearch.amazonaws.com/2013-01-01/search?q=(or%20actors:%27Dustin%20Hoffman%27actors:%27Gary%20Oldman%27actors:%27Daniel%20Day%20Lewis%27actors:%27Christopher%20Walken%27)&sort=rating%20desc&size=10&return=title&q.parser=structured
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=UTF-8
+      etag:
+      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      last-modified:
+      - Sun, 12 Oct 2014 03:55:22 GMT
+      content-length:
+      - '630'
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJzdGF0dXMiOnsicmlkIjoicGVtYjBwQXB2Z0VLSGdHbiIsInRpbWUtbXMi
+        OjN9LCJoaXRzIjp7ImZvdW5kIjo2Mywic3RhcnQiOjAsImhpdCI6W3siaWQi
+        OiJ0dDAxMTA0MTMiLCJmaWVsZHMiOnsidGl0bGUiOiJMw6lvbiJ9fSx7Imlk
+        IjoidHQwMDc3NDE2IiwiZmllbGRzIjp7InRpdGxlIjoiVGhlIERlZXIgSHVu
+        dGVyIn19LHsiaWQiOiJ0dDAxMDcyMDciLCJmaWVsZHMiOnsidGl0bGUiOiJJ
+        biB0aGUgTmFtZSBvZiB0aGUgRmF0aGVyIn19LHsiaWQiOiJ0dDAwNjE3MjIi
+        LCJmaWVsZHMiOnsidGl0bGUiOiJUaGUgR3JhZHVhdGUifX0seyJpZCI6InR0
+        MDQ2OTQ5NCIsImZpZWxkcyI6eyJ0aXRsZSI6IlRoZXJlIFdpbGwgQmUgQmxv
+        b2QifX0seyJpZCI6InR0MDA3MDUxMSIsImZpZWxkcyI6eyJ0aXRsZSI6IlBh
+        cGlsbG9uIn19LHsiaWQiOiJ0dDAwNzQxMTkiLCJmaWVsZHMiOnsidGl0bGUi
+        OiJBbGwgdGhlIFByZXNpZGVudCdzIE1lbiJ9fSx7ImlkIjoidHQwMDk1OTUz
+        IiwiZmllbGRzIjp7InRpdGxlIjoiUmFpbiBNYW4ifX0seyJpZCI6InR0MDEw
+        MjEzOCIsImZpZWxkcyI6eyJ0aXRsZSI6IkpGSyJ9fSx7ImlkIjoidHQwMDY0
+        NjY1IiwiZmllbGRzIjp7InRpdGxlIjoiTWlkbmlnaHQgQ293Ym95In19XX19
+    http_version: '1.1'
+  recorded_at: Mon, 13 Oct 2014 16:11:02 GMT
+recorded_with: VCR 2.9.2

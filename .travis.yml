@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+  - 2.1.2
+branches:
+  only:
+    - master
+env:
+  global:
+  - secure: "Hwc2CCx2hUKBMwV9Y9eXNlq879wm20ZVLahTDpQE9z89UH4QGMI+Bu5R9ZWflmUqFritAKZt6OqfcV3+/rxF9N+phJCI7cozy6M/QjtIY48/n7Ip6+VlhdzHFrqU9huOkuzIbzu/R8bWSElCXpboUwwD17COo0CDjp1PEPAHIew="
+

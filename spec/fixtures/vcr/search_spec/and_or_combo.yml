@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://search-imdb-test-klzdilptuleeedvxt7to3c5xl4.us-east-1.cloudsearch.amazonaws.com/2013-01-01/search?q=(and%20genres:%27Action%27(or%20actors:%27Stallon%27actors:%27Jackie%27actors:%27Arnold%27actors:%27Weathers%27actors:%27Van%20Damme%27))&sort=rating%20desc&size=10&return=title&q.parser=structured
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=UTF-8
+      etag:
+      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      last-modified:
+      - Sun, 12 Oct 2014 03:55:22 GMT
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: '{"status":{"rid":"/eLO0pApxgEKHgGn","time-ms":44},"hits":{"found":65,"start":0,"hit":[{"id":"tt0103064","fields":{"title":"Terminator
+        2: Judgment Day"}},{"id":"tt0088247","fields":{"title":"The Terminator"}},{"id":"tt0093773","fields":{"title":"Predator"}},{"id":"tt0083944","fields":{"title":"First
+        Blood"}},{"id":"tt0409459","fields":{"title":"Watchmen"}},{"id":"tt1211956","fields":{"title":"Escape
+        Plan"}},{"id":"tt0111512","fields":{"title":"Jui kuen II"}},{"id":"tt0100802","fields":{"title":"Total
+        Recall"}},{"id":"tt1302011","fields":{"title":"Kung Fu Panda 2"}},{"id":"tt0111503","fields":{"title":"True
+        Lies"}}]}}'
+    http_version: '1.1'
+  recorded_at: Mon, 13 Oct 2014 16:24:57 GMT
+recorded_with: VCR 2.9.2

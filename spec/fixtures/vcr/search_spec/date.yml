@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://search-imdb-test-klzdilptuleeedvxt7to3c5xl4.us-east-1.cloudsearch.amazonaws.com/2013-01-01/search?q=(and%20plot:%27James%20Bond%27)&fq=release_date:%5B%271970-01-01T00:00:00Z%27,%7D&return=title&q.parser=structured
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=UTF-8
+      etag:
+      - '"YzAwMDAwMDAwMDAwMDAwMFNvbHI="'
+      last-modified:
+      - Sun, 12 Oct 2014 03:55:22 GMT
+      transfer-encoding:
+      - chunked
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: '{"status":{"rid":"9v/10JApuwEKHgGn","time-ms":3},"hits":{"found":12,"start":0,"hit":[{"id":"tt0079574","fields":{"title":"Moonraker"}},{"id":"tt0086006","fields":{"title":"Never
+        Say Never Again"}},{"id":"tt0093428","fields":{"title":"The Living Daylights"}},{"id":"tt0120347","fields":{"title":"Tomorrow
+        Never Dies"}},{"id":"tt0143145","fields":{"title":"The World Is Not Enough"}},{"id":"tt0113189","fields":{"title":"GoldenEye"}},{"id":"tt0066995","fields":{"title":"Diamonds
+        Are Forever"}},{"id":"tt0076752","fields":{"title":"The Spy Who Loved Me"}},{"id":"tt0246460","fields":{"title":"Die
+        Another Day"}},{"id":"tt0086034","fields":{"title":"Octopussy"}}]}}'
+    http_version: '1.1'
+  recorded_at: Mon, 13 Oct 2014 15:25:45 GMT
+recorded_with: VCR 2.9.2
