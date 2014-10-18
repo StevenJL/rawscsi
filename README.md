@@ -16,15 +16,15 @@ search_object.search(q: {
                                         },
                                  },
                                  { or: [
-                                       { actor: "Connery" },
-                                       { actor: "Craig" },
-                                       { actor: "Moore"},
-                                       { not: {
-                                                actor: "Brosnan"
-                                              },
-                                       }
-                                     ]}
-                               ]
+                                         { actor: "Connery" },
+                                         { actor: "Craig" },
+                                         { actor: "Moore"}
+                                       ]
+                                 },
+                                 { not: {
+                                          actor: "Brosnan"
+                                        }
+                                 }]
                          },
                       date: {release_date: "[1970-01-01,}"},
                       sort: "rating desc",
