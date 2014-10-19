@@ -40,7 +40,7 @@ In theory, if the query is allowed on Cloudsearch, this gem can construct it.
 
 4) Has some nice Active Record integration features.
 
-5) Supports Ruby 1.8.7, 1.9.3, 2.0.0, 2.1.0, and 2.1.2
+5) Supports Ruby 1.9.3, 2.0.0, 2.1.0, and 2.1.2
 
 Here's the official aws cloud search documentation: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/what-is-cloudsearch.html
 
