@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["StevenJLi@gmail.com"]
   spec.description   = %q{Ruby Amazon Web Services Cloud Search Interface}
   spec.summary       = %q{Adds service objects to upload and search active record models with AWS Cloud Search }
-  spec.homepage      = "https://github.com/br/rawscsi"
+  spec.homepage      = "https://github.com/stevenjl/rawscsi"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
