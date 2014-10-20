@@ -96,9 +96,10 @@ book_indexer = Rawscsi::Index.new('Book')
 # since Book is not an active record object, we upload hashes instead
 # Note the id key in the hash  will be used as the cloud search record id.
 book_indexer.upload([
-  {id: 1234, title: "Surely you're Joking, Mr. Feynman", author: "Richard Feynman"},
-  {id: 5546, title: "Zen and the Art of Motorcycle Maintanence", author: "Robert Pirsig"}
+  {id: 1234, title: "Surely you're Joking, Mr. Feynman", author: "Richard Feynman", publish_date: "1985-01-01T00:00:00Z"},
+  {id: 5546, title: "Zen and the Art of Motorcycle Maintanence", author: "Robert Pirsig", publish_date: "1974-04-01T00:00:00Z"}
 ])
+# Also note the date format
 ```
 
 ### Deleting indices
