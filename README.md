@@ -27,7 +27,7 @@ search_object.search(q: {
                                         }
                                  }]
                          },
-                      date: {release_date: "[1970-01-01,}"},
+                      date: {release_date: "['1970-01-01',}"},
                       sort: "rating desc",
                       limit: 3
                     )
@@ -183,13 +183,13 @@ search_songs.search(q: {
                                 { title: "Street"}
                                ]
                          },
-                    date: { release_date: "[1995-01-01,}"}
+                    date: { release_date: "['1995-01-01',}"}
                     limit: 5,
                     sort: "rating desc"
                    ) 
 # Conjunction of two constraints and date constraint (Top 5 Hip Hop songs with Street in title released after 1995)
 # Note date syntax is working in conjunction (and) with the frist two constraints. This is always the case.
-# Also note syntax for searching date ranges: "[1995-01-01,}" is all dates after Jan 1 1995 while "{,1995-01-01]" is all dates before.
+# Also note syntax for searching date ranges: "['1995-01-01',}" is all dates after Jan 1 1995 while "{,'1995-01-01']" is all dates before.
 # Note we're limiting only 5 results and sorting by rating in descending order.
 => [{song_id: 54642, title: "Street Dreams", artist: "Nas"},
     {song_id: 98786, title: "Street Struck", artist: "Big L"},
