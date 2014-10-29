@@ -11,6 +11,7 @@ module Rawscsi
           query,
           date,
           sort,
+          start,
           limit,
           fields,
           "q.parser=structured"
@@ -42,7 +43,12 @@ module Rawscsi
         return nil unless query_hash[:sort]
         encode("sort=#{query_hash[:sort]}")
       end
-      
+
+      def start
+        return nil unless query_hash[:start]
+        "start=#{query_hash[:start]}"
+      end
+     
       def limit
         return nil unless query_hash[:limit]
         "size=#{query_hash[:limit]}"

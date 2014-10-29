@@ -76,5 +76,15 @@ describe Rawscsi::Query::Compound do
 
     expect(str).to eq("q=(and%20title:%27star%27(not%20title:%27wars%27))&q.parser=structured")
   end
+
+  it "constructs a query with pagination" do
+    arg = {
+      :q => {:and => [{:title => "star wars"}]},
+      :start => 2,
+      :limit => 3
+    }
+    str = Rawscsi::Query::Compound.new(arg).build
+    expect(str).to eq("q=(and%20title:%27star%20wars%27)&start=2&size=3&q.parser=structured")
+  end
 end
 

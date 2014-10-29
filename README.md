@@ -42,6 +42,8 @@ In theory, if the query is allowed on Cloudsearch, this gem can construct it.
 
 5) Supports Ruby 1.9.3, 2.0.0, 2.1.0, and 2.1.2
 
+6) Supports Pagination
+
 Here's the official aws cloud search documentation: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/what-is-cloudsearch.html
 
 ## Installation
@@ -253,6 +255,16 @@ search_songs.search(q: {and: [ {artist: "Cold Play"} ],
     { title: "Sparks"}]
 
 ```
+
+### Pagination
+
+```ruby
+# paginate with the `start` and `limit` params
+search_songs.search(q: {and: [{artist: "Beatles"}]},
+                    start: 25,
+                    limit: 5)
+```
+
 
 ## Contributing
 
