@@ -236,9 +236,7 @@ And of course, negation:
 search_songs.search(q: {
                          and: [ 
                                 { title: "All Along the Watchtower"},
-                                  not: {
-                                          artist: "Dave Matthews Band"
-                                       }
+                                { not: { artist: "Dave Matthews Band" }
                               ]
                         }
                     )
