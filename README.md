@@ -74,8 +74,8 @@ Rawscsi.register 'Song' do |config|
 end
 
 Rawscsi.register 'Book' do |config|
-  config.name = 'good-books'
-  config.id = 'dj43g6i77dof86lk34fsf2s'
+  config.domain_name = 'good-books'
+  config.domain_id = 'dj43g6i77dof86lk34fsf2s'
   config.region = 'us-east-1'
   config.api_version = '2013-01-01' # rawscsi only supports api version 2013-01-01
 end
