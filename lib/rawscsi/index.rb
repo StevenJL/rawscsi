@@ -25,7 +25,7 @@ module Rawscsi
       if id_array.length < 20000
         delete_from_amazon(id_array)
       else
-        id_array.slice(20000) do |sub_array|
+        id_array.each_slice(20000).to_a.each do |sub_array|
          delete_from_amazon(sub_array)
         end
       end
