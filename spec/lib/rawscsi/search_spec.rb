@@ -128,18 +128,15 @@ describe Rawscsi::Search do
                   :sort => "rating desc",
                   :fields => [:title],
                   :limit => 10)
-      expect(results).to eq([
-        {"title"=>"Léon", "id"=>"tt0110413"},
-        {"title"=>"The Deer Hunter", "id"=>"tt0077416"},
-        {"title"=>"In the Name of the Father", "id"=>"tt0107207"},
-        {"title"=>"The Graduate", "id"=>"tt0061722"},
-        {"title"=>"There Will Be Blood", "id"=>"tt0469494"},
-        {"title"=>"Papillon", "id"=>"tt0070511"},
-        {"title"=>"All the President's Men", "id"=>"tt0074119"},
-        {"title"=>"Rain Man", "id"=>"tt0095953"},
-        {"title"=>"JFK", "id"=>"tt0102138"},
-        {"title"=>"Midnight Cowboy", "id"=>"tt0064665"}
-      ])
+      expect(results).to include({"title"=>"The Deer Hunter", "id"=>"tt0077416"})
+      expect(results).to include({"title"=>"In the Name of the Father", "id"=>"tt0107207"})
+      expect(results).to include({"title"=>"The Graduate", "id"=>"tt0061722"})
+      expect(results).to include({"title"=>"There Will Be Blood", "id"=>"tt0469494"})
+      expect(results).to include({"title"=>"Papillon", "id"=>"tt0070511"})
+      expect(results).to include({"title"=>"All the President's Men", "id"=>"tt0074119"})
+      expect(results).to include({"title"=>"Rain Man", "id"=>"tt0095953"})
+      expect(results).to include({"title"=>"JFK", "id"=>"tt0102138"})
+      expect(results).to include({"title"=>"Midnight Cowboy", "id"=>"tt0064665"})
     end
   end
 
