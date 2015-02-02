@@ -6,7 +6,7 @@ module Rawscsi
       end
 
       def build
-        @response["hits"]["hit"].map {|h| h["fields"]}
+        @response["hits"]["hit"].map {|h| h["fields"].merge("id" => h["id"])}
       end
     end
   end
