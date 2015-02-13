@@ -7,7 +7,7 @@ module Rawscsi
       end
 
       def build
-        id_array = @response["hits"]["hit"].map {|h| h["id"].to_i }
+        id_array = @response["hits"]["hit"].map {|h| model_id(h["id"]) }
         return [] if id_array.empty?
         results =
           if ActiveRecord::VERSION::MAJOR > 2
@@ -21,6 +21,10 @@ module Rawscsi
       private
       def klass
         @model.constantize 
+      end
+
+      def model_id(doc_id)
+        doc_id.split('_').last.to_i
       end
     end
   end
