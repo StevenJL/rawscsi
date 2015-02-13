@@ -1,10 +1,10 @@
 module Rawscsi
   module IndexHelpers
     class SdfDelete
-      attr_reader :id
+      attr_reader :obj_or_id
 
-      def initialize(id)       
-        @id = id
+      def initialize(obj_or_id)       
+        @obj_or_id = obj_or_id
       end
   
       def build
@@ -16,12 +16,12 @@ module Rawscsi
 
       private
       def doc_id
-        if id.kind_of?(String) || id.kind_of?(Numeric)
-          id
-        elsif id.kind_of?(Hash)
-          id[:id]
+        if obj_or_id.kind_of?(String) || obj_or_id.kind_of?(Numeric)
+          obj_or_id
+        elsif obj_or_id.kind_of?(Hash)
+          obj_or_id[:id]
         else
-          "#{id.class}_#{id.id}"
+          "#{obj_or_id.class}_#{obj_or_id.id}"
         end
       end
     end

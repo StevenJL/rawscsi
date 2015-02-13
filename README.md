@@ -108,6 +108,13 @@ book_indexer.upload([
 ```ruby
 song_indexer.delete([3244, 53452, 5435, 64545, 34342, 4545])
 # To delete records in the search domain, you just pass an array of ids (the cloud search record id)
+
+# you can also pass in an array of active record objects to be deleted
+song_indexer.delete([
+  # active record objects
+  <id: 4567, title: "Saturdays Reprise", artist: "Cut Copy", album: "Bright Like Neon Love">
+  <id: 5456, title: "Common Burn", artist: "Mazzy Star", album: "Seasons of Your Day">
+])
 ```
 
 ##### Automatically Batches on cloud search's 5Mb Upload Limit 

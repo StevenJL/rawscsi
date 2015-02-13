@@ -41,7 +41,7 @@ describe Rawscsi::Search do
   it "performs a search with specified return fields" do
     VCR.use_cassette("search_spec/fields") do
       results = @search_helper.search(:q => {:and => [{:title => "Die Hard"}]}, :fields => [:title, :genres])
-      expect(results).to include({"genres"=>["Action", "Thriller"], "title" => "Die Hard", "id" => "tt0095016"})
+      expect(results).to include({"genres"=>["Action", "Thriller"], "title" => "Die Hard", "id"=>"tt0095016"})
       expect(results).to include({"genres"=>["Action", "Thriller"], "title" => "Die Hard 2", "id"=>"tt0099423"})
     end
   end
@@ -52,7 +52,7 @@ describe Rawscsi::Search do
       results = @search_helper.search(:q => {:and => [{:actors => "Kevin Bacon"}, {:actors => "Tom Hanks"}]},
                                       :fields => [:title])
 
-      expect(results).to eq([{"title" => "Apollo 13", "id"=>"tt0112384"}])
+      expect(results).to eq([{"title"=>"Apollo 13", "id"=>"tt0112384"}])
     end
   end
 
@@ -77,7 +77,7 @@ describe Rawscsi::Search do
                                          },
                                       :fields => [:title])
       expect(results).to eq([{"title"=>"The Terminator", "id"=>"tt0088247"},
-                             {"title"=>"Terminator 2: Judgment Day", "id"=>"tt0103064"}])
+                             {"title"=>"Terminator 2: Judgment Day", "id"=>"tt0103064" }])
     end
   end
 
@@ -89,10 +89,9 @@ describe Rawscsi::Search do
                                       :limit => 3,
                                       :fields => [:title])
       expect(results).to eq([
-        {"title"=>"Star Wars: Episode V - The Empire Strikes Back", "id"=>"tt0080684"},
-        {"title"=>"Inception", "id"=>"tt1375666"},
-        {"title"=>"The Matrix", "id"=>"tt0133093"}
-      ])
+              {"title"=> "Star Wars: Episode V - The Empire Strikes Back", "id"=>"tt0080684"},
+              {"title"=>"Inception", "id"=>"tt1375666"},
+              {"title"=>"The Matrix", "id"=>"tt0133093"}])
     end
   end
 
@@ -102,18 +101,20 @@ describe Rawscsi::Search do
       results = @search_helper.search(:q => {:and => [{:plot => "James Bond"}]},
                                       :date => { :release_date => "['1970-01-01',}" },
                                       :fields => [:title])
-      expect(results).to eq([
-        {"title"=>"Moonraker", "id"=>"tt0079574"},
-        {"title"=>"Never Say Never Again", "id"=>"tt0086006"},
-        {"title"=>"The Living Daylights", "id"=>"tt0093428"},
-        {"title"=>"Tomorrow Never Dies", "id"=>"tt0120347"},
-        {"title"=>"The World Is Not Enough", "id"=>"tt0143145"},
-        {"title"=>"GoldenEye", "id"=>"tt0113189"},
-        {"title"=>"Diamonds Are Forever", "id"=>"tt0066995"},
-        {"title"=>"The Spy Who Loved Me", "id"=>"tt0076752"},
-        {"title"=>"Die Another Day", "id"=>"tt0246460"},
-        {"title"=>"Octopussy", "id"=>"tt0086034"}                            
-      ])
+      expect(results).to eq(
+        [
+          {"title"=>"Moonraker", "id"=>"tt0079574"},
+          {"title"=>"Never Say Never Again", "id"=>"tt0086006"},
+          {"title"=>"The Living Daylights", "id"=>"tt0093428"},
+          {"title"=>"Tomorrow Never Dies", "id"=>"tt0120347"},
+          {"title"=>"The World Is Not Enough", "id"=>"tt0143145"},
+          {"title"=>"GoldenEye", "id"=>"tt0113189"},
+          {"title"=>"Diamonds Are Forever", "id"=>"tt0066995"},
+          {"title"=>"The Spy Who Loved Me", "id"=>"tt0076752"},
+          {"title"=>"Die Another Day", "id"=>"tt0246460"},
+          {"title"=>"Octopussy", "id"=>"tt0086034"}
+        ]
+      )
     end
   end
 
@@ -132,11 +133,8 @@ describe Rawscsi::Search do
       expect(results).to include({"title"=>"In the Name of the Father", "id"=>"tt0107207"})
       expect(results).to include({"title"=>"The Graduate", "id"=>"tt0061722"})
       expect(results).to include({"title"=>"There Will Be Blood", "id"=>"tt0469494"})
-      expect(results).to include({"title"=>"Papillon", "id"=>"tt0070511"})
+      expect(results).to include({"title"=>"Papillon", "id"=>"tt0070511" })
       expect(results).to include({"title"=>"All the President's Men", "id"=>"tt0074119"})
-      expect(results).to include({"title"=>"Rain Man", "id"=>"tt0095953"})
-      expect(results).to include({"title"=>"JFK", "id"=>"tt0102138"})
-      expect(results).to include({"title"=>"Midnight Cowboy", "id"=>"tt0064665"})
     end
   end
 
@@ -153,18 +151,20 @@ describe Rawscsi::Search do
                   :sort => "rating desc",
                   :fields => [:title],
                   :limit => 10)
-      expect(results).to eq([
-        {"title"=>"Terminator 2: Judgment Day", "id"=>"tt0103064"},
-        {"title"=>"The Terminator", "id"=>"tt0088247"},
-        {"title"=>"Predator", "id"=>"tt0093773"},
-        {"title"=>"First Blood", "id"=>"tt0083944"},
-        {"title"=>"Watchmen", "id"=>"tt0409459"},
-        {"title"=>"Escape Plan", "id"=>"tt1211956"},
-        {"title"=>"Jui kuen II", "id"=>"tt0111512"},
-        {"title"=>"Total Recall", "id"=>"tt0100802"},
-        {"title"=>"Kung Fu Panda 2", "id"=>"tt1302011"},
-        {"title"=>"True Lies", "id"=>"tt0111503"}
-      ])
+      expect(results).to eq(
+        [
+          {"title"=>"Terminator 2: Judgment Day", "id"=>"tt0103064"},
+          {"title"=>"The Terminator", "id"=>"tt0088247"},
+          {"title"=>"Predator", "id"=>"tt0093773"},
+          {"title"=>"First Blood", "id"=>"tt0083944"},
+          {"title"=>"Watchmen", "id"=>"tt0409459"},
+          {"title"=>"Escape Plan", "id"=>"tt1211956"},
+          {"title"=>"Jui kuen II", "id"=>"tt0111512"},
+          {"title"=>"Total Recall", "id"=>"tt0100802"},
+          {"title"=>"Kung Fu Panda 2", "id"=>"tt1302011"},
+          {"title"=>"True Lies", "id"=>"tt0111503"}
+        ]
+      )
     end
   end
   
