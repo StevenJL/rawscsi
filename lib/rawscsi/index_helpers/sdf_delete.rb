@@ -10,8 +10,19 @@ module Rawscsi
       def build
         {
           :type => "delete",
-          :id => id
+          :id => doc_id
         }
+      end
+
+      private
+      def doc_id
+        if id.kind_of?(String) || id.kind_of?(Numeric)
+          id
+        elsif id.kind_of?(Hash)
+          id[:id]
+        else
+          "#{id.class}_#{id.id}"
+        end
       end
     end
   end
