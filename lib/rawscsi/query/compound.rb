@@ -71,9 +71,13 @@ module Rawscsi
         end
       end
 
-      def compound?(hash) 
-        ar = hash.keys
-        ar.include?(:and) || ar.include?(:or)
+      def compound?(value)
+        if value.kind_of?(Hash)
+          ar = value.keys
+          ar.include?(:and) || ar.include?(:or)
+        else
+          false
+        end
       end
 
       def stringify_compound(hash)
@@ -82,28 +86,37 @@ module Rawscsi
         "(#{bool_op}" + encode(" #{bool_map(ar)}") + ")"
       end
 
-      def stringify_noncompound(hash)
-        if not_hash = hash[:not]
+      def stringify_noncompound(value)
+        if value.kind_of?(Hash) && not_hash = value[:not]
           "(not" + encode(" #{stringify(not_hash)}") + ")"
-        elsif range = hash[:range]
+        elsif value.kind_of?(Hash) && range = value[:range]
           range 
         else
-          encode(stringify(hash))
+          encode(stringify(value))
         end
       end
 
-     def bool_map(array)
+     def bool_map(value)
         output = ""
-        array.each do |pred|
-          output << compound_bool(pred)
+        if value.kind_of?(Enumerable)
+          value.each do |v|
+            output << compound_bool(v)
+          end
+        else
+          output = compound_bool(value)
         end
+
         output
       end
 
-      def stringify(hash)
+      def stringify(value)
         output_str = ""
-        hash.each do |k,v|
-          output_str << "#{k}:'#{v}'"
+        if value.kind_of?(Hash)
+          value.each do |k,v|
+            output_str << "#{k}:'#{v}'"
+          end
+        else
+          output_str << value.to_s
         end
         output_str
       end
