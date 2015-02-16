@@ -261,6 +261,23 @@ search_songs.search(q: {and: [ {artist: "Cold Play"} ],
 
 ```
 
+### Prefix Matching
+
+Rawscsi supports prefix matching using the `prefix` key. 
+
+```ruby
+search_songs.search(q: {prefix: "To"})
+=> [{song_id: 54967, title: "Aenima", artist: "Tool"},
+    {song_id: 96566, title: "Lateralus", artist: "Tool"},
+    {song_id: 32356, title: "Today is the Day", artist: "Yo La Tengo"}]
+
+# you can specify the prefix for a certain field
+search_songs.search(q: {and: [{genres: "80s"},
+                              {prefix: "Every"})
+=> [{song_id: 91485, title: "Everybody Wants to Rule the World", artist: "Tears for Fears"},
+    {song_id: 96566, title: "Everything Counts", artist: "Depeche Mode"}]
+```
+
 ### Pagination
 
 ```ruby

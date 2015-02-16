@@ -22,7 +22,7 @@ module Rawscsi
         if not_hash = value[:not]
           "(not" + encode(" #{stringify(not_hash)}") + ")"
         elsif pre_hash = value[:prefix]
-          "(prefix" + encode(" #{stringify_prefix(pre_hash)}") + ")"
+          "(prefix" + encode(" #{stringify(pre_hash, true)}") + ")"
         elsif range = value[:range]
           range
         else
@@ -30,11 +30,11 @@ module Rawscsi
         end
       end
 
-      def stringify_prefix(value)
+      def stringify(value, prefix=false)
         output_str = ""
         if value.kind_of?(Hash)
           value.each do |k,v|
-            output_str << "field=#{k} '#{v}'"
+            output_str << kv_stringify(k, v, prefix)
           end
         else
           output_str <<  "'#{value.to_s}'"
@@ -42,16 +42,12 @@ module Rawscsi
         output_str
       end
 
-      def stringify(value)
-        output_str = ""
-        if value.kind_of?(Hash)
-          value.each do |k,v|
-            output_str << "#{k}:'#{v}'"
-          end
+      def kv_stringify(k, v, prefix=false) 
+        if prefix
+          "field=#{k} '#{v}'"
         else
-          output_str << "'#{value.to_s}'"
+          "#{k}:'#{v}'"
         end
-        output_str
       end
     end
   end
