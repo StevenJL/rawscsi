@@ -273,7 +273,7 @@ search_songs.search(q: {prefix: "To"})
 
 # you can specify the prefix for a certain field
 search_songs.search(q: {and: [{genres: "80s"},
-                              {prefix: "Every"})
+                              {prefix: {title: "Every"}})
 => [{song_id: 91485, title: "Everybody Wants to Rule the World", artist: "Tears for Fears"},
     {song_id: 96566, title: "Everything Counts", artist: "Depeche Mode"}]
 ```
