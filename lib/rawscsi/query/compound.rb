@@ -1,6 +1,10 @@
+require "pry"
+
 module Rawscsi
   module Query
     class Compound
+      include Rawscsi::Stringifier::Encode
+
       attr_reader :query_hash
       def initialize(query_hash)
         @query_hash = query_hash
@@ -20,7 +24,7 @@ module Rawscsi
 
       private
       def query
-      "q=" + compound_bool(query_hash[:q])
+        "q=" + Rawscsi::Query::Stringifier.new(query_hash[:q]).build
       end
 
       def date
@@ -62,72 +66,7 @@ module Rawscsi
         end
         "return=" + output.join(",")
       end
-
-      def compound_bool(hash)
-        if compound?(hash)
-          stringify_compound(hash)
-        else
-          stringify_noncompound(hash)
-        end
-      end
-
-      def compound?(value)
-        if value.kind_of?(Hash)
-          ar = value.keys
-          ar.include?(:and) || ar.include?(:or)
-        else
-          false
-        end
-      end
-
-      def stringify_compound(hash)
-        bool_op = hash.keys.first
-        ar = hash[bool_op]
-        "(#{bool_op}" + encode(" #{bool_map(ar)}") + ")"
-      end
-
-      def stringify_noncompound(value)
-        if value.kind_of?(Hash) && not_hash = value[:not]
-          "(not" + encode(" #{stringify(not_hash)}") + ")"
-        elsif value.kind_of?(Hash) && range = value[:range]
-          range 
-        else
-          encode(stringify(value))
-        end
-      end
-
-     def bool_map(value)
-        output = ""
-        if value.kind_of?(Enumerable)
-          value.each do |v|
-            output << compound_bool(v)
-          end
-        else
-          output = compound_bool(value)
-        end
-
-        output
-      end
-
-      def stringify(value)
-        output_str = ""
-        if value.kind_of?(Hash)
-          value.each do |k,v|
-            output_str << "#{k}:'#{v}'"
-          end
-        else
-          output_str << value.to_s
-        end
-        output_str
-      end
-
-      def encode(str)
-        # URI and CGI.escape don't quite work here
-        # For example, I need blank space as %20, but they encode it as +
-        # So I have to write my own
-        str.gsub(' ', '%20').gsub("'", '%27').gsub("[", '%5B').gsub("]",'%5D').gsub("{", '%7B').gsub("}", '%7D')
-      end
-    end
+   end
   end
 end
 

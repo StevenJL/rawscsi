@@ -1,5 +1,7 @@
 $:.unshift(File.expand_path("../", __FILE__))
 
+require "pry"
+
 module Rawscsi
   autoload :Version,       'rawscsi/version'
   autoload :Base,          'rawscsi/base'
@@ -9,6 +11,13 @@ module Rawscsi
   module Query
     autoload :Simple,      "rawscsi/query/simple"
     autoload :Compound,    "rawscsi/query/compound"
+    autoload :Stringifier,  "rawscsi/query/stringifier"
+  end
+
+  module Stringifier
+    autoload :Simple,      "rawscsi/stringifier/simple"
+    autoload :Compound,    "rawscsi/stringifier/compound"
+    autoload :Encode,      "rawscsi/stringifier/encode"
   end
 
   module SearchHelpers
