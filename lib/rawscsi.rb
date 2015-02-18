@@ -1,7 +1,5 @@
 $:.unshift(File.expand_path("../", __FILE__))
 
-require "pry"
-
 module Rawscsi
   autoload :Version,       'rawscsi/version'
   autoload :Base,          'rawscsi/base'

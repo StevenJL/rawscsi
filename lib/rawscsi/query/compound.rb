@@ -1,5 +1,3 @@
-require "pry"
-
 module Rawscsi
   module Query
     class Compound
