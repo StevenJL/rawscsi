@@ -37,12 +37,28 @@ describe Rawscsi::Search do
       expect(result_titles).to include("Star Wars: Episode I - The Phantom Menace")
     end
   end
+
+  it "performs a simple search with raw fields container returned" do
+    VCR.use_cassette('search_spec/simple_search') do
+      results = @search_helper.search('star wars', :raw => true)
+
+      expect(results).to be_a Rawscsi::SearchHelpers::ResultsHash
+    end
+  end
   
   it "performs a search with specified return fields" do
     VCR.use_cassette("search_spec/fields") do
       results = @search_helper.search(:q => {:and => [{:title => "Die Hard"}]}, :fields => [:title, :genres])
       expect(results).to include({"genres"=>["Action", "Thriller"], "title" => "Die Hard", "id"=>"tt0095016"})
       expect(results).to include({"genres"=>["Action", "Thriller"], "title" => "Die Hard 2", "id"=>"tt0099423"})
+    end
+  end
+
+  it "performs a search with specified and raw option return fields" do
+    VCR.use_cassette("search_spec/fields") do
+      results = @search_helper.search(:q => {:and => [{:title => "Die Hard"}]}, :fields => [:title, :genres], :raw => true)
+
+      expect(results).to be_a Rawscsi::SearchHelpers::ResultsHash
     end
   end
 

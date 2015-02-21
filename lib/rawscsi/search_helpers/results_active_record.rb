@@ -1,6 +1,8 @@
 module Rawscsi
   module SearchHelpers
     class ResultsActiveRecord
+      attr_reader :response
+
       def initialize(response, model)
         @response = response
         @model = model
