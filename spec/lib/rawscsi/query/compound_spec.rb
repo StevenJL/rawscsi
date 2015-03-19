@@ -9,11 +9,20 @@ describe Rawscsi::Query::Compound do
   end
 
   it "constructs a query that looks only at a single field and specifies fields" do
-    arg = {:q => {:and => [{:title => "star wars"}]}, :fields => [:title, :genres]}    
+    arg = {:q => {:and => [{:title => "star wars"}]}, :fields => [:title, :genres]}
     str = Rawscsi::Query::Compound.new(arg).build
     expect(str).to eq("q=(and%20title:%27star%20wars%27)&return=title,genres&q.parser=structured")
   end
 
+  it "constructs a query with distance" do
+    arg = { :q => { :and => [{:actors => "Arnold"}, {:title => "Terminator"},{:range => "rating:['8',}"}]},
+            :fields => [:title],
+            :'expr.distance' => "haversin(35.621966,-120.686706,location.latitude,location.longitude)"
+
+          }
+    str = Rawscsi::Query::Compound.new(arg).build
+    expect(str).to eq("q=(and%20actors:%27Arnold%27title:%27Terminator%27rating:%5B%278%27,%7D)&expr.distance=haversin(35.621966,-120.686706,location.latitude,location.longitude)&return=title&q.parser=structured")
+  end
   it "constructs a query with a numeric range" do
     arg = { :q => { :and => [{:actors => "Arnold"}, {:title => "Terminator"},{:range => "rating:['8',}"}]},
             :fields => [:title]
@@ -95,7 +104,7 @@ describe Rawscsi::Query::Compound do
 
   it "constructs a combination of conjunction and prefix query" do
     arg = {:q => {:and => [{:genres => "Action"},
-                           {:prefix => {:actor => "Stallone"}}]}} 
+                           {:prefix => {:actor => "Stallone"}}]}}
     str = Rawscsi::Query::Compound.new(arg).build
 
     expect(str).to eq("q=(and%20genres:%27Action%27(prefix%20field=actor%20%27Stallone%27))&q.parser=structured")

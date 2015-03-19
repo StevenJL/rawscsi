@@ -11,6 +11,7 @@ module Rawscsi
       def build
         [
           query,
+          distance,
           date,
           sort,
           start,
@@ -46,11 +47,16 @@ module Rawscsi
         encode("sort=#{query_hash[:sort]}")
       end
 
+      def distance
+        return nil unless query_hash[:'expr.distance']
+        "expr.distance=#{query_hash[:'expr.distance']}"
+      end
+
       def start
         return nil unless query_hash[:start]
         "start=#{query_hash[:start]}"
       end
-     
+
       def limit
         return nil unless query_hash[:limit]
         "size=#{query_hash[:limit]}"
