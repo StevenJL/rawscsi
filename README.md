@@ -178,6 +178,15 @@ search_songs.search(q: {and: [ {artist: "Cold Play"} ],
     { title: "Sparks"}]
 
 ```
+
+Search location(defined a location field with type latlon)
+
+```ruby
+User.search(q: {skills: 'boxing'},
+            sort: "distance asc",
+            "expr.distance": 'haversin(35.621966,-120.686706,location.latitude,location.longitude)')
+
+```
 The default sort order is Amazon Cloudsearch's rank-score but you can use your own sort as well as a limiting the number of results.
 ```ruby
 search_songs.search(q: {and: [{genres: "Rock"}]}, sort: "rating desc", limit: 100)
