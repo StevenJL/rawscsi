@@ -54,8 +54,8 @@ module Rawscsi
       end
 
       def qoptions
-        return nil unless query_hash[:'q.options']
-        "q.options=#{query_hash[:'q.options']}"
+        return nil unless query_hash[:qoptions]
+        "q.options=#{CGI.escape(query_hash[:qoptions])}"
       end
 
       def start
