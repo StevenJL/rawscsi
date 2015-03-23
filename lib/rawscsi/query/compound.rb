@@ -12,6 +12,7 @@ module Rawscsi
         [
           query,
           distance,
+          qoptions,
           date,
           sort,
           start,
@@ -50,6 +51,11 @@ module Rawscsi
       def distance
         return nil unless query_hash[:'expr.distance']
         "expr.distance=#{query_hash[:'expr.distance']}"
+      end
+
+      def qoptions
+        return nil unless query_hash[:'q.options']
+        "q.options=#{query_hash[:'q.options']}"
       end
 
       def start

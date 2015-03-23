@@ -23,6 +23,13 @@ describe Rawscsi::Query::Compound do
     str = Rawscsi::Query::Compound.new(arg).build
     expect(str).to eq("q=(and%20actors:%27Arnold%27title:%27Terminator%27rating:%5B%278%27,%7D)&expr.distance=haversin(35.621966,-120.686706,location.latitude,location.longitude)&return=title&q.parser=structured")
   end
+
+  it "constructs a query with q.options" do
+    arg = {:q => {:and => [{:title => "star wars"}]}, :fields => [:title, :genres], :'q.options' => "{fields:['title^2','genres^0.1']}"}
+    str = Rawscsi::Query::Compound.new(arg).build
+    expect(str).to eq("q=(and%20title:%27star%20wars%27)&q.options={fields:['title^2','genres^0.1']}&return=title,genres&q.parser=structured")
+  end
+
   it "constructs a query with a numeric range" do
     arg = { :q => { :and => [{:actors => "Arnold"}, {:title => "Terminator"},{:range => "rating:['8',}"}]},
             :fields => [:title]

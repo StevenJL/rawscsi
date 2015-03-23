@@ -187,6 +187,13 @@ User.search(q: {skills: 'boxing'},
             "expr.distance": 'haversin(35.621966,-120.686706,location.latitude,location.longitude)')
 
 ```
+
+For example, if you want matches within the title field to score higher than matches within the plot field, you could set the weight of the title field to 2 and the weight of the plot field to 0.5:
+
+```ruby
+Moive.search(q: {and: [{title: "title", plot: "plot"}]}, :'q.options' => "{fields:['title^2','plot^0.5']}")
+```
+
 The default sort order is Amazon Cloudsearch's rank-score but you can use your own sort as well as a limiting the number of results.
 ```ruby
 search_songs.search(q: {and: [{genres: "Rock"}]}, sort: "rating desc", limit: 100)
