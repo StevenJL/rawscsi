@@ -179,19 +179,25 @@ search_songs.search(q: {and: [ {artist: "Cold Play"} ],
 
 ```
 
-Search location(defined a location field with type latlon)
+###### Sort by location
+Suppose your search domain has the `latlon` field for geographical location data. You can sort your results
+by geographical distance.
 
 ```ruby
-User.search(q: {skills: 'boxing'},
+# returns all theathers playing "The Big Lebowski" sorted by geographical proximity
+# where your location is 35.621966 latitude and -120.686706 longitude
+movie_theaters.search(q: {films: "The Big Lebowski" },
             sort: "distance asc",
-            "expr.distance": 'haversin(35.621966,-120.686706,location.latitude,location.longitude)')
-
+            location: {latitude: 35.621966, longitude: -120.686706}
+            )
 ```
 
-For example, if you want matches within the title field to score higher than matches within the plot field, you could set the weight of the title field to 2 and the weight of the plot field to 0.5:
+###### Weighing fields
+You can weigh fields in your search request.
 
 ```ruby
-Moive.search(q: {and: [{title: "title", plot: "plot"}]}, qoptions: "{fields:['title^2','plot^0.5']}")
+You care much more about matches in the title, than matches in the plot.
+movie_search.search(q: {and: [{title: "title", plot: "plot"}]}, weights: "{fields:['title^2','plot^0.5']}")
 ```
 
 The default sort order is Amazon Cloudsearch's rank-score but you can use your own sort as well as a limiting the number of results.

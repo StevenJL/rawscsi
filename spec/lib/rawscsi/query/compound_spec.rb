@@ -17,15 +17,14 @@ describe Rawscsi::Query::Compound do
   it "constructs a query with distance" do
     arg = { :q => { :and => [{:actors => "Arnold"}, {:title => "Terminator"},{:range => "rating:['8',}"}]},
             :fields => [:title],
-            :'expr.distance' => "haversin(35.621966,-120.686706,location.latitude,location.longitude)"
-
+            :location => {latitude: 35.621966, longitude: -120.686706}
           }
     str = Rawscsi::Query::Compound.new(arg).build
     expect(str).to eq("q=(and%20actors:%27Arnold%27title:%27Terminator%27rating:%5B%278%27,%7D)&expr.distance=haversin(35.621966,-120.686706,location.latitude,location.longitude)&return=title&q.parser=structured")
   end
 
   it "constructs a query with qoptions" do
-    arg = {:q => {:and => [{:title => "star wars"}]}, :fields => [:title, :genres], qoptions: "{fields:['title^2','genres^0.1']}"}
+    arg = {:q => {:and => [{:title => "star wars"}]}, :fields => [:title, :genres], weights: "{fields:['title^2','genres^0.1']}"}
     str = Rawscsi::Query::Compound.new(arg).build
     expect(str).to eq("q=(and%20title:%27star%20wars%27)&q.options=%7Bfields%3A%5B%27title%5E2%27%2C%27genres%5E0.1%27%5D%7D&return=title,genres&q.parser=structured")
   end

@@ -49,13 +49,13 @@ module Rawscsi
       end
 
       def distance
-        return nil unless query_hash[:'expr.distance']
-        "expr.distance=#{query_hash[:'expr.distance']}"
+        return nil unless location = query_hash[:location]
+        "expr.distance=haversin(#{location[:latitude]},#{location[:longitude]},location.latitude,location.longitude)"
       end
 
       def qoptions
-        return nil unless query_hash[:qoptions]
-        "q.options=#{CGI.escape(query_hash[:qoptions])}"
+        return nil unless weights = query_hash[:weights]
+        "q.options=#{CGI.escape(weights)}"
       end
 
       def start
