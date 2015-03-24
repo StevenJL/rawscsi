@@ -196,7 +196,7 @@ movie_theaters.search(q: {films: "The Big Lebowski" },
 You can weigh fields in your search request.
 
 ```ruby
-You care much more about matches in the title, than matches in the plot.
+# You care much more about matches in the title, than matches in the plot.
 movie_search.search(q: {and: [{title: "title", plot: "plot"}]}, weights: "{fields:['title^2','plot^0.5']}")
 ```
 
