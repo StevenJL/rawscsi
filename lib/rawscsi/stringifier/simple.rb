@@ -44,7 +44,7 @@ module Rawscsi
 
       def kv_stringify(k, v, prefix=false) 
         if prefix
-          "field=#{k} '#{v}'"
+          "field%3D#{k} '#{v}'"
         else
           "#{k}:'#{v}'"
         end
