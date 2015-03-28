@@ -113,7 +113,7 @@ describe Rawscsi::Query::Compound do
                            {:prefix => {:actor => "Stallone"}}]}}
     str = Rawscsi::Query::Compound.new(arg).build
 
-    expect(str).to eq("q=(and%20genres:%27Action%27(prefix%20field=actor%20%27Stallone%27))&q.parser=structured")
+    expect(str).to eq("q=(and%20genres:%27Action%27(prefix%20field%3Dactor%20%27Stallone%27))&q.parser=structured")
   end
 end
 
