@@ -52,6 +52,21 @@ module Rawscsi
         req.url "#{config.api_version}/documents/batch"
         req.headers["Content-type"] = "application/json"
         req.body = payload.to_json
+        if config.secret_key && config.access_key_id
+          signature = RequestSignature.new({
+            secret_key: config.secret_key,
+            access_key_id: config.access_key_id,
+            region_name: config.region,
+            endpoint: "/#{req.path}",
+            method: req.method.to_s.upcase,
+            headers: req.headers,
+            host: connection.url_prefix.hostname,
+            payload: req.body,
+          }).build
+          signature[:headers].each do |name, value|
+            req.headers[name] = value
+          end
+        end
       end
       resp.body
     end
