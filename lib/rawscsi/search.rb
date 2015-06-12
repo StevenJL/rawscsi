@@ -2,9 +2,15 @@ require "httparty"
 
 module Rawscsi
   class Search < Base
+    include Rawscsi::Stringifier::Encode
+
     def search(arg, options = {})
-      if arg.is_a?(String)  
-        query = Rawscsi::Query::Simple.new(arg).build
+      if arg.is_a?(String)
+        if options[:query_string]
+          query = "q=#{ encode(arg) }&q.parser=structured"
+        else
+          query = Rawscsi::Query::Simple.new(arg).build
+        end
         raw = options[:raw]
       elsif arg.is_a?(Hash)
         query = Rawscsi::Query::Compound.new(arg).build
