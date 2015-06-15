@@ -7,7 +7,7 @@ module Rawscsi
     def search(arg, options = {})
       if arg.is_a?(String)
         if options[:query_string]
-          query = "q=#{ encode(arg) }&q.parser=structured"
+          query = "q=#{ encode(CGI.escape arg) }&q.parser=structured"
         else
           query = Rawscsi::Query::Simple.new(arg).build
         end
