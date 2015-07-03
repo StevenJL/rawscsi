@@ -323,6 +323,18 @@ search_songs.search(q: {and: [{artist: "Beatles"}]},
                     limit: 5)
 ```
 
+## Request signing
+
+[Signature V4 guide from Amazon](http://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html)
+
+Request signature is created by `Rawscsi::RequestSignature` class with simple public api with only a few methods:
+
++ `#initialize` - accepts the hash with the data of request to sign. 
+Required keys are `:secret_key`, `:access_key_id`, `:region_name`, `:endpoint`, `:method`, `:host`. 
+Optional keys are `:debug`, `:payload`, `:service_name`, `:headers`, `:query`.
+
++ `#build` - calculates and returns the hash with `:signature` key containing the headers to include in request.
+If `:debug` is passed on object creation, it also provides the debug data in `:debug` key, including of results of intermidiate steps.
 
 ## Contributing
 
