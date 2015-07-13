@@ -81,6 +81,20 @@ Rawscsi.register 'Book' do |config|
 end
 ```
 
+You can also specify AWS user credentials if you want to access the private serach domain.
+(note: search domain and AWS credentials specified below are fictional and serve only as an example) 
+
+```ruby
+Rawscsi.register 'SuperSecretDiaryEntry' do |config|
+  config.domain_name = 'super-secret-diary-entries'
+  config.domain_id = '12be09027f865cba2d57719'
+  config.region = 'us-east-1'
+  config.api_version = '2013-01-01' # rawscsi only supports api version 2013-01-01
+  config.access_key_id = '7386b16f9bee30d6e5a98786'
+  config.secret_key = 'af86958e6919a03713408fd9'
+end
+```
+
 ### Uploading indices
 ```ruby
 song_indexer = Rawscsi::Index.new('Song', :active_record => true)
@@ -309,6 +323,18 @@ search_songs.search(q: {and: [{artist: "Beatles"}]},
                     limit: 5)
 ```
 
+## Request signing
+
+[Signature V4 guide from Amazon](http://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html)
+
+Request signature is created by `Rawscsi::RequestSignature` class with simple public api with only a few methods:
+
++ `#initialize` - accepts the hash with the data of request to sign. 
+Required keys are `:secret_key`, `:access_key_id`, `:region_name`, `:endpoint`, `:method`, `:host`. 
+Optional keys are `:debug`, `:payload`, `:service_name`, `:headers`, `:query`.
+
++ `#build` - calculates and returns the hash with `:signature` key containing the headers to include in request.
+If `:debug` is passed on object creation, it also provides the debug data in `:debug` key, including of results of intermidiate steps.
 
 ## Contributing
 

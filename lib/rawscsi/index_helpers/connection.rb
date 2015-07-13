@@ -7,7 +7,7 @@ module Rawscsi
       attr_reader :url
       
       def initialize(config)
-        @url= "http://doc-#{config.domain_name}-#{config.domain_id}.#{config.region}.cloudsearch.amazonaws.com"
+        @url = config.index_domain || "http://doc-#{config.domain_name}-#{config.domain_id}.#{config.region}.cloudsearch.amazonaws.com"
       end
 
       def build

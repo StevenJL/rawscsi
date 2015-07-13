@@ -1,10 +1,11 @@
 $:.unshift(File.expand_path("../", __FILE__))
 
 module Rawscsi
-  autoload :VERSION,       'rawscsi/version'
-  autoload :Base,          'rawscsi/base'
-  autoload :Search,        'rawscsi/search'
-  autoload :Index,         'rawscsi/index'
+  autoload :VERSION,            'rawscsi/version'
+  autoload :Base,               'rawscsi/base'
+  autoload :RequestSignature,   'rawscsi/request_signature'
+  autoload :Search,             'rawscsi/search'
+  autoload :Index,              'rawscsi/index'
 
   module Query
     autoload :Simple,      "rawscsi/query/simple"
@@ -37,7 +38,12 @@ module Rawscsi
       :region,
       :api_version,
       :attributes,
-      :batch_size
+      :batch_size,
+      :use_https,
+      :access_key_id,
+      :secret_key,
+      :search_domain,
+      :index_domain
   end
   
   def self.register(model)
