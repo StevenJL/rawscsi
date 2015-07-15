@@ -1,9 +1,9 @@
+require "pry"
 module Rawscsi
   class RequestSignature
-    def initialize(*args)
-      options = args.extract_options!
+    def initialize(options)
       required_attributes_missing = []
-      require_attribute = -> (name) do
+      require_attribute = lambda do |name|
         return options[name] if options.has_key?(name) 
         required_attributes_missing << name
         nil 
@@ -19,11 +19,11 @@ module Rawscsi
       unless required_attributes_missing.size == 0
         raise "#{required_attributes_missing.join(',')} attributes required for a request signature"
       end
-    
+
       self.debug_mode = options[:debug] || false  
       self.payload = options[:payload] || ''
       self.service_name = options[:service_name] || 'cloudsearch'
-      self.headers = options[:headers].to_h.merge(default_headers)
+      self.headers = extract_headers(options)
       self.query = options[:query] || ''
     end
 
@@ -43,6 +43,11 @@ module Rawscsi
     end
 
     private
+
+    def extract_headers(options)
+      return default_headers unless opt_headers = options[:headers] 
+      opt_headers.to_h.merge(default_headers)
+    end
 
     def debug_data
       {
@@ -93,7 +98,7 @@ module Rawscsi
     end
 
     def datetime
-      @datetime ||= DateTime.now.utc
+      @datetime ||= Time.now.utc
     end
 
     def amz_datetime
