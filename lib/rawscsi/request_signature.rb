@@ -1,7 +1,6 @@
 module Rawscsi
   class RequestSignature
-    def initialize(*args)
-      options = args.extract_options!
+    def initialize(options)
       required_attributes_missing = []
       require_attribute = -> (name) do
         return options[name] if options.has_key?(name) 
@@ -93,7 +92,7 @@ module Rawscsi
     end
 
     def datetime
-      @datetime ||= DateTime.now.utc
+      @datetime ||= Time.now.utc
     end
 
     def amz_datetime
