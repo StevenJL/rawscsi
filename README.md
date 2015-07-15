@@ -314,6 +314,17 @@ search_songs.search(q: {and: [{genres: "80s"},
     {song_id: 96566, title: "Everything Counts", artist: "Depeche Mode"}]
 ```
 
+### Plain compound queries
+
+If you need to perform a query that can't be constructed via hash, you can construct it manually and pass
+it to Rawscsi like this:
+
+
+```ruby
+search_songs.search("(and (phrase field='title' 'Air Near'))", query_string: true)
+=> [<Song id:156, artist: "White Stripes", title: "The Air Near My Fingers">]
+```
+
 ### Pagination
 
 ```ruby
