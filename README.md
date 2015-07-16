@@ -314,6 +314,18 @@ search_songs.search(q: {and: [{genres: "80s"},
     {song_id: 96566, title: "Everything Counts", artist: "Depeche Mode"}]
 ```
 
+### Compound queries with phrase
+
+Here's the AWS documentation on phrase matching in compound queries: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-text.html#searching-text-phrases
+
+Rawscsi supports the `phrase` condition for compound queries
+
+
+```ruby
+search_songs.search(q: {and: [{phrase: {title: "Air Near"}}]})
+=> [<Song id:156, artist: "White Stripes", title: "The Air Near My Fingers">]
+```
+
 ### Pagination
 
 ```ruby

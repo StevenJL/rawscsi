@@ -11,20 +11,24 @@ module Rawscsi
 
       def build
         if value.kind_of?(Hash)
-          build_from_hash
+          build_from_hash(value)
         else
           encode(stringify(value))
         end
       end
 
       private
-      def build_from_hash
+      def build_from_hash(value)
         if not_hash = value[:not]
           "(not" + encode(" #{stringify(not_hash)}") + ")"
         elsif pre_hash = value[:prefix]
           "(prefix" + encode(" #{stringify(pre_hash, true)}") + ")"
         elsif range = value[:range]
           range
+        elsif phrase = value[:phrase]
+          field = phrase.keys.first
+          value = phrase[field]
+          encode("(phrase field='#{field}' '#{value}')")
         else
           encode(stringify(value))
         end
