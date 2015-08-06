@@ -34,7 +34,7 @@ module Rawscsi
 
   class Configuration
     attr_accessor :domain_name,
-      :domain_id, 
+      :domain_id,
       :region,
       :api_version,
       :attributes,
@@ -44,8 +44,18 @@ module Rawscsi
       :secret_key,
       :search_domain,
       :index_domain
+
+    def http_options=(options)
+      raise 'The http_options parameter must be a Hash instance' unless options.is_a? ::Hash
+      @http_options = options
+    end
+
+    def http_options
+      @http_options = {} unless @http_options
+      @http_options
+    end
   end
-  
+
   def self.register(model)
     config = Configuration.new
     yield(config)
