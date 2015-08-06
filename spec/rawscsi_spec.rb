@@ -30,7 +30,7 @@ describe Rawscsi do
     expect(book_config.api_version).to eq('2011-02-01')
   end
 
-  it 'http_options parameter must be a Hash instance' do
+  it 'http_options parameter must be an instance of Hash' do
     expect {
       Rawscsi.register 'Song' do |config|
         config.domain_name = 'good_songs'
@@ -39,7 +39,7 @@ describe Rawscsi do
         config.api_version = '2011-02-01'
         config.http_options = ''
       end
-    }.to raise_error RuntimeError, 'The http_options parameter must be a Hash instance'
+    }.to raise_error RuntimeError, 'The http_options parameter must be an instance of Hash'
   end
 
   it 'http_options parameter default value is {}' do

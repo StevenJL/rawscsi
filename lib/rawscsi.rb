@@ -46,7 +46,7 @@ module Rawscsi
       :index_domain
 
     def http_options=(options)
-      raise 'The http_options parameter must be a Hash instance' unless options.is_a? ::Hash
+      raise 'The http_options parameter must be an instance of Hash' unless options.is_a? ::Hash
       @http_options = options
     end
 
