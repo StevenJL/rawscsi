@@ -29,5 +29,40 @@ describe Rawscsi do
     expect(book_config.region).to eq('us-east-1')
     expect(book_config.api_version).to eq('2011-02-01')
   end
+
+  it 'http_options parameter must be an instance of Hash' do
+    expect {
+      Rawscsi.register 'Song' do |config|
+        config.domain_name = 'good_songs'
+        config.domain_id = 'akldfjakljf3894fjeaf9df'
+        config.region = 'us-east-1'
+        config.api_version = '2011-02-01'
+        config.http_options = ''
+      end
+    }.to raise_error RuntimeError, 'The http_options parameter must be an instance of Hash'
+  end
+
+  it 'http_options parameter default value is {}' do
+    Rawscsi.register 'Song' do |config|
+      config.domain_name = 'good_songs'
+      config.domain_id = 'akldfjakljf3894fjeaf9df'
+      config.region = 'us-east-1'
+      config.api_version = '2011-02-01'
+    end
+    song_config = Rawscsi.registered_models['Song']
+    expect(song_config.http_options).to eq({})
+  end
+
+  it 'http_options parameter value is correct' do
+     Rawscsi.register 'Song' do |config|
+      config.domain_name = 'good_songs'
+      config.domain_id = 'akldfjakljf3894fjeaf9df'
+      config.region = 'us-east-1'
+      config.api_version = '2011-02-01'
+      config.http_options = { http_proxyaddr: 'proxy.com' }
+    end
+    song_config = Rawscsi.registered_models['Song']
+    expect(song_config.http_options).to eq({ http_proxyaddr: 'proxy.com' })
+  end
 end
 

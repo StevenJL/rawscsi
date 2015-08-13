@@ -63,7 +63,9 @@ module Rawscsi
                 else
                   {}
                 end
-      HTTParty.get(url_query, headers: signature[:headers])
+
+      http_options = config.http_options.merge(headers: signature[:headers])
+      HTTParty.get(url_query, http_options)
     end
 
 
