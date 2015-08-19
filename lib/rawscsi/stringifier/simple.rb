@@ -28,7 +28,7 @@ module Rawscsi
         elsif phrase = value[:phrase]
           field = phrase.keys.first
           value = phrase[field]
-          encode("(phrase field='#{field}' '#{value}')")
+          encode("(phrase field%3D'#{field}' '#{value}')")
         else
           encode(stringify(value))
         end
