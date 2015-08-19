@@ -115,5 +115,13 @@ describe Rawscsi::Query::Compound do
 
     expect(str).to eq("q=(and%20genres:%27Action%27(prefix%20field%3Dactor%20%27Stallone%27))&q.parser=structured")
   end
+
+  it "constructs a phrase query" do
+    arg = {
+      :q => {:and => [{:phrase => {:title => "star wars"}}]}
+    }
+    str = Rawscsi::Query::Compound.new(arg).build
+    expect(str).to eq("q=(and%20(phrase%20field=%27title%27%20%27star%20wars%27))&q.parser=structured")
+  end
 end
 
