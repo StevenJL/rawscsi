@@ -133,7 +133,7 @@ module Rawscsi
     def canonical_headers
       @canonical_headers ||= headers.to_a.group_by(&:first).map do |name, values|
         canonical_values = values.map(&:last).map do |value|
-          value.to_s.first == '"' ? value : value.squeeze(' ')
+          value.to_s.[0]] == '"' ? value : value.squeeze(' ')
         end
         [ name.to_s.downcase, canonical_values.join(',') ]
       end.sort { |a, b| a.first <=> b.first }
