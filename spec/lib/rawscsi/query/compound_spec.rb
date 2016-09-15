@@ -123,5 +123,13 @@ describe Rawscsi::Query::Compound do
     str = Rawscsi::Query::Compound.new(arg).build
     expect(str).to eq("q=(and%20(phrase%20field%3D%27title%27%20%27star%20wars%27))&q.parser=structured")
   end
-end
 
+  # Passing a keyword in this manner should not result in quotes around the keyword
+  it "properly quotes the search query" do
+    arg = {
+      :q => 'matchall'
+    }
+    str = Rawscsi::Query::Compound.new(arg).build
+    expect(str).to eq("q=matchall&q.parser=structured")
+  end
+end
