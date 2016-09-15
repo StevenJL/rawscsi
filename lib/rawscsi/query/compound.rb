@@ -24,7 +24,12 @@ module Rawscsi
 
       private
       def query
-        "q=" + Rawscsi::Query::Stringifier.new(query_hash[:q]).build
+        q = query_hash[:q]
+        if q.is_a?(String)
+          "q=#{CGI.escape(q)}"
+        else
+          "q=" + Rawscsi::Query::Stringifier.new(q).build
+        end
       end
 
       def date
@@ -79,4 +84,3 @@ module Rawscsi
    end
   end
 end
-
