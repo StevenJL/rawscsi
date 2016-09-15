@@ -11,8 +11,8 @@ Ruby Amazon Web Services Cloud Search Interface (Rawscsi) is a flexible gem for 
 ```ruby
 search_object.search(q: {
                           and: [
-                                 { plot: "James Bond" }, 
-                                 { not: { 
+                                 { plot: "James Bond" },
+                                 { not: {
                                           title: "Casino"
                                         },
                                  },
@@ -60,7 +60,7 @@ Or install it yourself as:
 
     $ gem install rawscsi
 
-### Registering Search Domains 
+### Registering Search Domains
 
 Suppose we have two search domains: Songs and Books.  Let's say Song is an `active_record` model in our project. We first register them to `Rawscsi`.
 
@@ -82,7 +82,7 @@ end
 ```
 
 You can also specify AWS user credentials if you want to access the private serach domain.
-(note: search domain and AWS credentials specified below are fictional and serve only as an example) 
+(note: search domain and AWS credentials specified below are fictional and serve only as an example)
 
 ```ruby
 Rawscsi.register 'SuperSecretDiaryEntry' do |config|
@@ -131,7 +131,7 @@ song_indexer.delete([
 ])
 ```
 
-##### Automatically Batches on cloud search's 5Mb Upload Limit 
+##### Automatically Batches on cloud search's 5Mb Upload Limit
 Rawscsi is smart enough to break up large batch uploads into chunks of 5 Mb (cloud search's upload size limit per post request).
 
 ### Searching
@@ -181,16 +181,21 @@ search_songs_helper.search(q: {
 => [{song_id: 12345, title: "Angel in the Snow", artist: "Elliot Smith"},
     {song_id: 43534, title: "Angel, Angel Down We Go Together", artist: "The Smiths"}]
 ```
-By default, the search returns all the fields in the domain.  But you can specify which fields to return. 
+By default, the search returns all the fields in the domain.  But you can specify which fields to return.
 
 ```ruby
-search_songs.search(q: {and: [ {artist: "Cold Play"} ], 
+search_songs.search(q: {and: [ {artist: "Cold Play"} ],
                     fields: [:title])
 
 => [{ title: "Warning Sign"},
     { title: "God Put a Smile Upon Your Face"},
     { title: "Sparks"}]
 
+```
+
+#### Search for all documents in index
+```ruby
+search_songs_helper.search(q: 'matchall')
 ```
 
 ###### Sort by location
@@ -224,14 +229,14 @@ Here is an example of using a date constraint in conjunction ("and")  with other
 ```ruby
 search_songs.search(q: {
                          and: [
-                                { genres: "Hip Hop" }, 
+                                { genres: "Hip Hop" },
                                 { title: "Street"}
                                ]
                          },
                     date: { release_date: "['1995-01-01',}"}
                     limit: 5,
                     sort: "rating desc"
-                   ) 
+                   )
 # Conjunction of two constraints and date constraint (Top 5 Hip Hop songs with Street in title released after 1995)
 # Note date syntax is working in conjunction (and) with the frist two constraints. This is always the case.
 # Also note syntax for searching date ranges: "['1995-01-01',}" is all dates after Jan 1 1995 while "{,'1995-01-01']" is all dates before.
@@ -243,13 +248,13 @@ search_songs.search(q: {
     {song_id: 54644, title: "Street Corners", artist: "Wu-Tang Clan"}]
 ```
 
-So far, we've only seen 'and' examples.  Now let's look at some 'or' examples. 
+So far, we've only seen 'and' examples.  Now let's look at some 'or' examples.
 
 ```ruby
 search_songs.search(q: {
                          or: [
                                { artist: "Digitalism"},
-                               { artist: "Daft Punk"}, 
+                               { artist: "Daft Punk"},
                                { artist: "Justice"}
                              ]
                         }
@@ -260,7 +265,7 @@ search_songs.search(q: {
 # you can also combine `and` and `or` constraints
 search_songs.search(q: {
                           and: [
-                                  { range: "rating:['9',}"}, 
+                                  { range: "rating:['9',}"},
                                   { or: [
                                           { artist: "Bob Dylan" },
                                           { artist: "Lorde"}
@@ -275,9 +280,9 @@ search_songs.search(q: {
 And of course, negation:
 
 ```ruby
-# You love the song "All Along the Watchtower" but you didn't like the Dave Matthews Band cover 
+# You love the song "All Along the Watchtower" but you didn't like the Dave Matthews Band cover
 search_songs.search(q: {
-                         and: [ 
+                         and: [
                                 { title: "All Along the Watchtower"},
                                 { not: { artist: "Dave Matthews Band" }
                               ]
@@ -285,10 +290,10 @@ search_songs.search(q: {
                     )
 ```
 
-By default, the search returns all the fields in the domain.  But you can specify which fields to return. 
+By default, the search returns all the fields in the domain.  But you can specify which fields to return.
 
 ```ruby
-search_songs.search(q: {and: [ {artist: "Cold Play"} ], 
+search_songs.search(q: {and: [ {artist: "Cold Play"} ],
                     fields: [:title])
 
 => [{ title: "Warning Sign"},
@@ -299,7 +304,7 @@ search_songs.search(q: {and: [ {artist: "Cold Play"} ],
 
 ### Prefix Matching
 
-Rawscsi supports prefix matching using the `prefix` key. 
+Rawscsi supports prefix matching using the `prefix` key.
 
 ```ruby
 search_songs.search(q: {prefix: "To"})
@@ -341,8 +346,8 @@ search_songs.search(q: {and: [{artist: "Beatles"}]},
 
 Request signature is created by `Rawscsi::RequestSignature` class with simple public api with only a few methods:
 
-+ `#initialize` - accepts the hash with the data of request to sign. 
-Required keys are `:secret_key`, `:access_key_id`, `:region_name`, `:endpoint`, `:method`, `:host`. 
++ `#initialize` - accepts the hash with the data of request to sign.
+Required keys are `:secret_key`, `:access_key_id`, `:region_name`, `:endpoint`, `:method`, `:host`.
 Optional keys are `:debug`, `:payload`, `:service_name`, `:headers`, `:query`.
 
 + `#build` - calculates and returns the hash with `:signature` key containing the headers to include in request.
@@ -380,4 +385,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
